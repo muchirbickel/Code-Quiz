@@ -3,18 +3,36 @@ var correctAnswer = document.querySelector(".correctAnswer");
 var zero = document.querySelector(".zero");
 var timerElement = document.querySelector(".timer-count");
 var startButton = document.querySelector(".start-button");
-
+var quizContainer=document.querySelector(".quiz-container");
 
 var startTimer
 var timer
 var timerCounter
 
+startButton.addEventListener("click", function(){
+    console.log("HELLO")
+    startButton.style.display = "none";
+    showQuestion()
+})
 
-let question = {
+function showQuestion() {
+var questionText=document.createElement("p")
+questionText.textContent=question[0].title
+quizContainer.appendChild(questionText)
+
+}
+
+let question = [
+    
+    {
     title: "code ",
     alternatives: ["1", "2", "3", "4"],
     correctAnswer: 1
-}
+    }
+]
+
+
+
 
 function startTimer() {
     timer = setInterval(function () {
@@ -31,6 +49,6 @@ function startTimer() {
             loseGame();
             return;
         }
-    },1000);
+    }, 1000);
 }
 
