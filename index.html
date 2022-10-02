@@ -11,47 +11,59 @@
 
 <body>
 
-<!--top navbar shows highscores and timer-->
+    <!--top navbar shows highscores and timer-->
     <nav class="top-navbar">
-        <button>view highscores</button>
-        <div></div>
-        <p>timer:</p>
+        <button>view high scores</button>
+        <p>timer: 00:00</p>
     </nav>
 
- <!--inner div-->
- <div class="container">
- <!--start page include start button-->   
-<button class="start-button">start quiz</button>
-<div class="quiz-container"></div>
+    <!--inner div-->
+<div class="container">
+        
+    <!--main quiz introduction-->
+    <header class="quiz-intro">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Try to answer the following code-related questions within the time limit.<br>
+            Keep in mind that Incorrect answers will penalize your score/time by ten seconds!
+        </p>
+    <!--start page include start button-->
+        <button class="start-button">Start Quiz</button>
+            
 
+    </header>
 
-<!--main quiz introduction-->
-<header class="quiz-intro">
-
-
-</header>
-
-<!--main quiz content-->
-<main>
-
+    <!--main quiz content-->
+    <main class="quiz-container">
+        
     <!-- <section class="question1">
-        <h1 class="select">question</h1>
+        <h2 class="select">question</h2>
     </section>
     <section class="question2">
-        <h1 class="select">question</h1>
+        <h2 class="select">question</h2>
     </section>
     <section class="question3">
-        <h1 class="select">question</h1>
+        <h2 class="select">question</h2>
     </section>
     <section class="question4">
-        <h1 class="select">question</h1>
+        <h2 class="select">question</h2>
     </section>
     <section class="question5">
-        <h1 class="select">question</h1>
+        <h2 class="select">question</h>
     </section> -->
-    <script src="script.js"></script>
-</main>
-</div>   
+    <section class="quiz-finish-screen"></section>
+       <h3>All done!</h3>
+       <P>
+        your final score is <button class="final-score-num">0</button><br>
+        
+        <form>
+            <label for="fname">Enter innitials:</label>
+            <input type="text" id="fname" name="fname">
+       <button class="start-button">submit</button>
+       
+            <script src="script.js"></script>
+
+    </main>
+</div>
 </body>
 
 </html>
