@@ -9,6 +9,7 @@ var startTimer
 var timer
 var timerCounter
 
+//set start button and click to question//
 startButton.addEventListener("click", function(){
     console.log("HELLO")
     startButton.style.display = "none";
