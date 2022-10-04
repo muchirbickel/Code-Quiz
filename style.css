@@ -9,7 +9,7 @@
   body {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 550;
-    font-size: small;
+    font-size:medium;
     border-style: outset;
     border:1px solid black;
     border-radius: auto;
@@ -23,19 +23,32 @@
   
 /*nav bar setting*/
 .top-navbar {
-    display: flex;
-    margin:0;
-    justify-content: space-between;
-  }
+  display:flex;
+  margin:0;
+  justify-content: space-between;
+}
 
-  /*start-quiz button setting*/
-.start-button{
+  /*start-quiz and quiz-answers button setting*/
+button{
+  font-size:medium;
     outline:none;
     background-color:rgb(34, 34, 127);
     color:white;
 }
 
-button {
+h2 {
+  margin: 0 38%;
+  display: flex;
+  text-align:left;
+}
+
+.answers-button {
+  margin: 0 40%;
+  display: flex;
+  text-align:left;
+}
+
+.high-score-button {
     outline: none;
     background-color: white;
     color: rgb(205, 46, 205);
@@ -50,6 +63,4 @@ p {
 }
 
 /*quiz setting*/
-section {
-    text-align: center;
-}
+
