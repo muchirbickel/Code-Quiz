@@ -1,33 +1,26 @@
-var select = document.querySelector(".select");
-var correctAnswer = document.querySelector(".correctAnswer");
-var zero = document.querySelector(".zero");
-var timerElement = document.querySelector(".timer-count");
-var startButton = document.querySelector(".button");
-var quizContainer=document.querySelector(".quiz-container");
+var timer = 20;
+var score = 0;
+var questions = 0;
 
 var header = document.querySelector("#header");
 var time = document.querySelector("#time");
+var highScore = document.querySelector("#high-score");
 var finalScore = document.querySelector("#final-score");
 var inputField = document.getElementById("initial");
-var quizIntro = document.querySelector("#quiz-intro");
-var firstQuestion = document.querySelector("#question1");
-var secondQuestion = document.querySelector("#question2");
-var thirdQuestion = document.querySelector("#question3");
-var fourthQuestion = document.querySelector("#question4");
-var fifthQuestion = document.querySelector("#question5");
+var quizChallenge = document.querySelector("#main-screen");
+var firstQuestion = document.querySelector("#first-question");
+var secondQuestion = document.querySelector("#second-question");
+var thirdQuestion = document.querySelector("#third-question");
+var fourthQuestion = document.querySelector("#fourth-question");
+var fifthQuestion = document.querySelector("#fifth-question");
 var enterInitials = document.querySelector("#enter-initials");
 var highScore = document.querySelector("#display-highScore");
+var labelEl = document.querySelector("label");
 
-var timer=20;
-
-//set start button and click to question//
-startButton.addEventListener("click", function(){
-    console.log("click start button")
-    startButton.style.display = "none";
-    quizIntro.style.display = "none";
-    showQuestion()
-})
-
+/**
+ * This function to start counting down and stops when 
+ * questionnaire is finished or time is over.
+ */
 function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() {
@@ -38,99 +31,86 @@ function setTime() {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
       }
+      else {timer === 0;   
+      }
   
     }, 1000);
   }
 
+  /**
+   * This function changes the display property.
+   * @param {*} element1 is to have display off
+   * @param {*} element2 is to have display on
+   */
+  function switchScreen(element1, element2){
+    element1.setAttribute("style", "display:none;");
+    element2.setAttribute("style", "display:flex;");
+  }
+
+  /**
+   * This function checks if the value from data set matches or not
+   * @param {*} child 
+   */
+  function checkAnswer(child){
+    var answer = child.dataset.answer;
+        if(answer == "correct"){
+            score+=10;
+        }else{
+            timer-=4;
+        }
+  }
+
+  /**
+   * Event listener function to respond for every click.
+   */
 document.addEventListener("click", function(event){
     var child = event.target;
     if(child.matches("#start-quiz")){
         setTime();
-        quizChallenge.setAttribute("style", "display: none;");
-        firstQuestion.setAttribute("style", "display: flex;");
-        console.log("displaying first question");
+        switchScreen(quizChallenge, firstQuestion);
     }
-    if(child.matches(".question1")){
-        console.log("first answer clicked");
+    if(child.matches(".first-question")){
         questions++;
-        var answer = child.dataset.answer;
-        if(answer == "correct"){
-            score+=10;
-        }else{
-            timer-=10;
-        }
-        console.log(score);
-        firstQuestion.setAttribute("style", "display:none;");
-        secondQuestion.setAttribute("style", "display:flex;");
+        checkAnswer(child);
+        switchScreen(firstQuestion, secondQuestion);
     }
-    if(child.matches(".question2")){
-        console.log("second answer clicked");
+    if(child.matches(".second-question")){
         questions++;
-        var answer = child.dataset.answer;
-        if(answer == "correct"){
-            score+=10;
-        }else{
-            timer-=10;
-        }
-        console.log(score);
-        secondQuestion.setAttribute("style", "display:none;");
-        thirdQuestion.setAttribute("style", "display:flex;");
+        checkAnswer(child);
+        switchScreen(secondQuestion, thirdQuestion);
     }
-    if(child.matches(".question3")){
-        console.log("third answer clicked");
+    if(child.matches(".third-question")){
         questions++;
-        var answer = child.dataset.answer;
-        if(answer == "correct"){
-            score+=10;
-        }else{
-            timer-=10;
-        }
-        console.log(score);
-        thirdQuestion.setAttribute("style", "display:none;");
-        fourthQuestion.setAttribute("style", "display:flex;");
+        checkAnswer(child);
+        switchScreen(thirdQuestion, fourthQuestion);
     }
-    if(child.matches(".question4")){
-        console.log("fourth answer clicked");
+    if(child.matches(".fourth-question")){
         questions++;
-        var answer = child.dataset.answer;
-        if(answer == "correct"){
-            score+=10;
-        }else{
-            timer-=10;
-        }
-        console.log(score);
-        fourthQuestion.setAttribute("style", "display:none;");
-        fifthQuestion.setAttribute("style", "display:flex;");
+        checkAnswer(child);
+        switchScreen(fourthQuestion, fifthQuestion);
     }
-    if(child.matches(".question5")){
-        console.log("fifth answer clicked");
+    if(child.matches(".fifth-question")){
         questions++;
-        var answer = child.dataset.answer;
-        if(answer == "correct"){
-            score+=10;
-        }else{
-            timer-=10;
-        }
-        console.log(score);
-        fifthQuestion.setAttribute("style", "display:none;");
-        enterInitials.setAttribute("style", "display:flex;");
+        checkAnswer(child);
+        switchScreen(fifthQuestion, enterInitials);
         finalScore.textContent = "Your final score is "+ score;
     }
     if(child.matches("#submit")){
-        console.log("submit button clicked");
         var value = inputField.value;
-        localStorage.setItem("initial", value);
-        localStorage.setItem("score", score);
-        enterInitials.setAttribute("style", "display:none;");
-        header.setAttribute("style", "display:none;");
-        highScore.setAttribute("style", "display:flex;");
+        labelEl.textContent = value + " " +score;
+        switchScreen(enterInitials, highScore);
+        time.setAttribute("style", "display:none;");
     }
     if(child.matches("#go-back")){
-        timer = 70;
+        timer = 20;
+        time.textContent = "time: " +timer;
         questions = 0;
         score = 0;
-        highScore.setAttribute("style", "display:none;");
-        quizChallenge.setAttribute("style", "display:flex;");
+        switchScreen(highScore, quizChallenge);
+        time.setAttribute("style", "display:flex;");
+    }
+    if(child.matches("#clear")){
+        labelEl.textContent = "";
     }
 
 });
